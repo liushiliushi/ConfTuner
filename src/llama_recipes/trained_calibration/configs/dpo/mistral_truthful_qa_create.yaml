@@ -1,0 +1,9 @@
+model_name: "mistralai/Mistral-7B-v0.1"
+reward_model_names: ["mistralai/Mistral-7B-v0.1"]
+model_device_map: {"main": "cuda:0", "reward0": "cuda:1"}
+dataset: "truthful_qa"
+limit: null
+split: validation
+output_dir: "data/trivia_qa/truthful_qa_test_mistral_generator_mistral_evaluator.jsonl"
+n_generations: 10
+batch_size: 6
