@@ -17,14 +17,27 @@ ConfTuner consists of two steps:
 
 1. Clone the repository:
 ```bash
-git clone git@github.com:liushiliushi/Uncertainty_ft.git
-cd Uncertainty_ft
+git clone https://github.com/liushiliushi/ConfTuner.git
+cd ConfTuner
 ```
 
-2. Install dependencies:
+2. Create a Python 3.10 environment and install dependencies from the repository root:
 ```bash
-pip install -r requirements.txt
+python3.10 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -r requirements.txt
+python -m pip check
 ```
+
+The dependency baseline targets **Linux x86_64 with an NVIDIA GPU and a
+CUDA-compatible driver**. The documented workflow imports vLLM and uses
+DeepSpeed; this is not a macOS/CPU installation. The core versions are pinned
+to avoid mixing incompatible PyTorch, vLLM, Transformers, and PEFT releases.
+This list was reconstructed from the source imports, not recovered from the
+original experiment environment; end-to-end GPU reproduction remains to be
+verified. It covers the ConfTuner generation, training, and inference scripts,
+not every bundled legacy utility under `src/llama_recipes/trained_calibration`.
 
 3. Set up OpenAI API credentials for GPT-4o evaluation:
 ```bash
@@ -35,6 +48,13 @@ export OPENAI_API_KEY='your-api-key-here'  # Replace with your OpenAI API key
 Note: The evaluation of answer accuracy is performed using GPT-4o. You need to set up your OpenAI API credentials before running any generation or evaluation scripts.
 
 ## Dataset Generation
+
+Run the remaining generation, training, and inference commands from `src/`
+so the script and configuration paths below resolve correctly:
+
+```bash
+cd src
+```
 
 To generate training datasets for different base models, use the following commands:
 
@@ -276,4 +296,3 @@ The checkpoints of ConfTuner:
 [ConfTuner based on Qwen](https://huggingface.co/liushiliushi/ConfTuner-Qwen)
 
 [ConfTuner based on Ministral](https://huggingface.co/liushiliushi/ConfTuner-Ministral)
-
